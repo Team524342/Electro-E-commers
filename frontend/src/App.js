@@ -1,11 +1,36 @@
-import './App.css';
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import Home from "./pages/home";
+import Products from "./pages/products";
+import Cart from "./pages/cart";
+import { CartProvider } from "./CartContext";
+import Checkout from "./pages/checkout";
+import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <h1>Welcome to Electro E-commerce</h1>
-      <p>Your one-stop shop for electronics !</p>
-    </div>
+    <CartProvider>
+    <Router>
+      <div>
+        <nav className="navbar">
+          <h1>ElectroMart ⚡</h1>
+          <ul>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/products">Products</Link></li>
+            <li><Link to="/cart">Cart</Link></li>
+          </ul>
+        </nav>
+
+        <div className="content">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/checkout" element={<Checkout />} />
+          </Routes>
+        </div>
+      </div>
+    </Router>
+    </CartProvider>
   );
 }
 
