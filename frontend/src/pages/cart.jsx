@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { CartContext } from "../CartContext";
+import { CartContext } from "../context/cartContext";
+import CartItem from "../components/CartItem";
 
 function Cart() {
     const { cart, removeFromCart } = useContext(CartContext);
@@ -14,21 +15,12 @@ function Cart() {
             ) : (
                 <div>
                     <ul>
-                        {cart.map((item) => (
-                            <li key={item.id}
-                            style={{ marginBottom: "10px" }}>
-                                <strong>{item.name}</strong> - ₹{item.price}
-                                <button onClick={() => removeFromCart(item.id)}
-                                style={{ marginLeft: "10px",backgroundColor: "#ff4d4d", 
-                                color: "white", 
-                                border: "none",
-                                borderRadius: "5px", 
-                                cursor: "pointer", 
-                                padding: "5px 8px" }}>
-                                    Remove
-                                </button>
-                            </li>
-                            ))}
+                        <ul>
+  {cart.map((item) => (
+    <CartItem key={item.id} item={item} removeFromCart={removeFromCart} />
+  ))}
+</ul>
+
                     </ul>
                     <h3>Total: ₹{total}</h3>
                                         <Link to="/checkout">
