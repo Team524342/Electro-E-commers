@@ -6,6 +6,7 @@ from .views import (
     ProductViewSet,
     CartView,
     PlaceOrderView,
+    CreateOrderAPIView,
 )
 
 router = DefaultRouter()
@@ -16,5 +17,6 @@ urlpatterns = [
     path('auth/register/', RegisterView.as_view(), name='register'),
     path('cart/', CartView.as_view(), name='cart'),
     path('place-order/', PlaceOrderView.as_view(), name='place-order'),
+    path('create-order/', CreateOrderAPIView.as_view(), name='create-order'),
     path('', include(router.urls)),
 ]

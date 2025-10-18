@@ -25,6 +25,57 @@ function Checkout() {
     return <p>Your cart is empty. Add items before checkout!</p>;
   }
 
+  const loadScript = (src) => {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = src;
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+  };
+
+
+  const handlePayment = async () => {
+    const res = await loadScript("https://checkout.razorpay.com/v1/checkout.js");
+    if (!res) {
+      alert("Razorpay SDK failed to load. Are you online?");
+      return;
+    }
+
+    const result = await fetch("http://127.0.0.1:8000/api/create-order/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ amount: 500 }), // ₹ 500
+    });
+
+    const data = await result.json();
+    if (!data.order_id) return alert("Something went wrong");
+
+    const options = {
+      key: data.key,
+      amount: data.amount,
+      currency: data.currency,
+      name: "Electro E-Commerce",
+      description: "Payment for Order",
+      order_id: data.order_id,
+      handler: async function (response) {
+        alert(`Payment Successful! Payment ID: ${response.razorpay_payment_id}`);
+        // TODO: verify payment via backend here
+      },
+      prefill: {
+        name: "Your Name",
+        email: "you@example.com",
+        contact: "9999999999",
+      },
+      theme: { color: "#3399cc" },
+    };
+
+    const paymentObject = new window.Razorpay(options);
+    paymentObject.open();
+  };
+
+
   return (
     <div>
       <h2>Checkout 💳</h2>
@@ -72,7 +123,7 @@ function Checkout() {
             </select>
           </label>
 
-          <button type="submit">Place Order</button>
+          <button  onClick={handlePayment}>Place Order</button> {/*  type="submit" */}
         </form>
       ) : (
         <div className="order-success">
@@ -85,5 +136,6 @@ function Checkout() {
     </div>
   );
 }
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
 export default Checkout;
