@@ -3,7 +3,7 @@ import Home from "./pages/Home";
 import Products from "./pages/Products";
 import Cart from "./pages/Cart";
 import { CartProvider } from "./context/CartContext";
-import Checkout from "./pages/Checkout";
+import Checkout from "./pages/checkout";
 import "./App.css";
 
 function App() {
