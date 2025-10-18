@@ -12,6 +12,8 @@ from .serializers import (
     OrderSerializer,
 )
 from django.db import transaction
+from django.conf import settings
+import razorpay
 
 
 # ----------------------------
@@ -103,3 +105,34 @@ class PlaceOrderView(APIView):
 
         cart_items.delete()
         return Response({'message': 'Order placed successfully'}, status=status.HTTP_201_CREATED)
+
+# ----------------------------
+# Razorpay Payment Integration View
+# ----------------------------
+
+
+class CreateOrderAPIView(APIView):
+    def post(self, request):
+        try:
+            amount = int(request.data.get("amount")) * 100  # convert ₹ to paise
+            currency = 'INR'
+
+            client = razorpay.Client(
+                auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET)
+            )
+
+            payment = client.order.create({
+                'amount': amount,
+                'currency': currency,
+                'payment_capture': 1
+            })
+
+            return Response({
+                'order_id': payment['id'],
+                'amount': amount,
+                'currency': currency,
+                'key': settings.RAZORPAY_KEY_ID
+            })
+
+        except Exception as e:
+            return Response({'error': str(e)}, status=400)

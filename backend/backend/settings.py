@@ -1,5 +1,11 @@
 
 from pathlib import Path
+from decouple import config
+
+RAZORPAY_KEY_ID = config('RAZORPAY_KEY_ID')
+RAZORPAY_KEY_SECRET = config('RAZORPAY_KEY_SECRET')
+SECRET_KEY = config('DJANGO_SECRET_KEY', default='dev-secret')
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
