@@ -8,6 +8,9 @@ const allProducts = [
   { id: 3, name: "Headphones", category: "Accessories", price: 1500, image: "/images/headphones.jpg" },
   { id: 4, name: "Smartwatch", category: "Wearables", price: 3000, image: "/images/watch.jpg" },
   { id: 5, name: "Tablet", category: "Computers", price: 25000, image: "/images/tablet.jpg" },
+  { id: 6, name: "Bluetooth Speaker", category: "Accessories", price: 3500, image: "/images/speaker.jpg" },
+  { id: 7, name: "Gaming Console", category: "Entertainment", price: 40000, image: "/images/console.jpg" },
+  { id: 8, name: "E-reader", category: "Entertainment", price: 8000, image: "/images/ereader.jpg" },
 ];
 
 function Products() {
