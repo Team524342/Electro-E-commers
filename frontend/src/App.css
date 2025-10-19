@@ -376,3 +376,16 @@ p {
   text-align: center;
   font-size: 14px;
 }
+
+.bolt {
+  display: inline-block;
+  transform-style: preserve-3d;
+  animation: yawRotation 1.5s linear infinite; /* faster rotation */
+}
+
+/* Smooth yaw rotation (around vertical Y-axis) */
+@keyframes yawRotation {
+  0%   { transform: rotateY(0deg); }
+  100% { transform: rotateY(360deg); }
+}
+

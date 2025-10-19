@@ -6,7 +6,8 @@ function Home() {
   return (
     <div className="home-container">
       <section className="hero">
-        <h1>Welcome to ElectroMart ⚡</h1>
+        <h1>Welcome to ElectroMart <span class="bolt">⚡</span></h1>
+
         <p>Your one-stop destination for all the latest and greatest electronics!</p>
         <Link to="/products">
           <button className="shop-btn">🛍️ Start Shopping</button>
