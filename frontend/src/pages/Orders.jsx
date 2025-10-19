@@ -1,27 +1,51 @@
-import React, { useContext } from "react";
-import { CartContext } from "../context/CartContext";
+import React, { useEffect, useState } from "react";
 
-function Orders() {
-  const { orders } = useContext(CartContext);
+const Orders = () => {
+  const [orders, setOrders] = useState([]);
 
-  if (!orders || orders.length === 0)
-    return <h2 style={{ textAlign: "center" }}>You have no orders yet.</h2>;
+  useEffect(() => {
+    const savedOrders = JSON.parse(localStorage.getItem("orders")) || [];
+    setOrders(savedOrders);
+  }, []);
 
   return (
-    <div className="orders-container">
+    <div style={{ padding: "20px" }}>
       <h2>📦 My Orders</h2>
-      {orders.map((order) => (
-        <div key={order.id} className="order-item">
-          <p>
-            <strong>Order #{order.id}</strong> — {order.status}
-          </p>
-          <p>Date: {order.date}</p>
-          <p>Items: {order.items.map((i) => i.name).join(", ")}</p>
-          <p>Total: ₹{order.total}</p>
+
+      {orders.length === 0 ? (
+        <p>You have no previous orders.</p>
+      ) : (
+        <div>
+          {orders.map((order) => (
+            <div
+              key={order.id}
+              style={{
+                background: "#fff",
+                marginBottom: "15px",
+                padding: "15px",
+                borderRadius: "10px",
+                boxShadow: "0 2px 5px rgba(0,0,0,0.1)"
+              }}
+            >
+              <h3>Order #{order.id}</h3>
+              <p><strong>Date:</strong> {order.date}</p>
+              <p><strong>Total:</strong> ${order.total}</p>
+              <p><strong>Status:</strong> {order.status}</p>
+
+              <h4>Items:</h4>
+              <ul>
+                {order.items.map((item) => (
+                  <li key={item.id}>
+                    {item.name} - ${item.price}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
-      ))}
+      )}
     </div>
   );
-}
+};
 
 export default Orders;

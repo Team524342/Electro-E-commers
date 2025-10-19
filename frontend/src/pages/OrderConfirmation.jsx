@@ -1,17 +1,37 @@
 import React from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function OrderConfirmation() {
-  const navigate = useNavigate();
   const { state } = useLocation();
-  const orderId = state?.orderId;
+  const navigate = useNavigate();
+
+  const order = state?.order;
+
+  if (!order) {
+    return (
+      <div>
+        <p>No order found. Go back to the products page.</p>
+        <button onClick={() => navigate("/products")}>Back to Shop</button>
+      </div>
+    );
+  }
 
   return (
-    <div className="confirm-container">
+    <div className="order-confirmation">
       <h2>✅ Order Confirmed!</h2>
-      <p>Thank you for shopping with ElectroMart!</p>
-      {orderId && <p>Your order number: <strong>{orderId}</strong></p>}
-      <button onClick={() => navigate("/orders")}>Track My Orders</button>
+      <p>Order ID: <strong>{order.id}</strong></p>
+      <p>Date: {order.date}</p>
+      <p>Status: {order.status}</p>
+      <h3>Items:</h3>
+      <ul>
+        {order.items.map((item) => (
+          <li key={item.id}>
+            {item.name} – ₹{item.price}
+          </li>
+        ))}
+      </ul>
+      <h3>Total: ₹{order.total}</h3>
+      <button onClick={() => navigate("/products")}>Continue Shopping</button>
     </div>
   );
 }
