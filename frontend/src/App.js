@@ -1,9 +1,14 @@
+import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home";
-import Products from "./pages/Products";
-import Cart from "./pages/Cart";
 import { CartProvider } from "./context/CartContext";
+//import { CartProvider } from "./CartContext";
+import Products from "./pages/Products";
 import Checkout from "./pages/checkout";
+import OrderConfirmation from "./pages/OrderConfirmation";
+import Cart from "./pages/Cart";
+import Orders from "./pages/Orders";
+
 import "./App.css";
 
 function App() {
@@ -26,6 +31,9 @@ function App() {
               <Route path="/products" element={<Products />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/checkout" element={<Checkout />} />
+              <Route path="/order-confirmation" element={<OrderConfirmation />} />
+              <Route path="/orders" element={<Orders />} />
+
             </Routes>
           </div>
         </div>
