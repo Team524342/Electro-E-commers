@@ -1,39 +1,55 @@
-import React, { useState, useContext } from "react";
-import { CartContext } from "../CartContext";
+import React, { useState } from "react";
+import ProductCard from "../components/ProductCard";
+import "./Products.css";
+
+const allProducts = [
+  { id: 1, name: "Laptop", category: "Computers", price: 50000, image: "/images/laptop.jpg" },
+  { id: 2, name: "Smartphone", category: "Mobiles", price: 20000, image: "/images/phone.jpg" },
+  { id: 3, name: "Headphones", category: "Accessories", price: 1500, image: "/images/headphones.jpg" },
+  { id: 4, name: "Smartwatch", category: "Wearables", price: 3000, image: "/images/watch.jpg" },
+  { id: 5, name: "Tablet", category: "Computers", price: 25000, image: "/images/tablet.jpg" },
+  { id: 6, name: "Bluetooth Speaker", category: "Accessories", price: 3500, image: "/images/speaker.jpg" },
+  { id: 7, name: "Gaming Console", category: "Entertainment", price: 40000, image: "/images/console.jpg" },
+  { id: 8, name: "E-reader", category: "Entertainment", price: 8000, image: "/images/ereader.jpg" },
+];
 
 function Products() {
-    const { addToCart } = useContext(CartContext);
+  const [search, setSearch] = useState("");
+  const [category, setCategory] = useState("All");
 
-    const [products] = useState([
-        { id: 1, name: "Smartphone", price: 29999, image: "https://via.placeholder.com/150" },
-        { id: 2, name: "Laptop", price: 59999, image: "https://via.placeholder.com/150" },
-        { id: 3, name: "Headphones", price: 1999, image: "https://via.placeholder.com/150" },
-        { id: 4, name: "Smartwatch", price: 9999, image: "https://via.placeholder.com/150" },
-        { id: 5, name: "Camera", price: 24999, image: "https://via.placeholder.com/150" },
-        { id: 6, name: "Tablet", price: 15999, image: "https://via.placeholder.com/150" },
-        { id: 7, name: "Bluetooth Speaker", price: 2999, image: "https://via.placeholder.com/150" },
-        { id: 8, name: "Gaming Console", price: 39999, image: "https://via.placeholder.com/150" },
-        { id: 9, name: "Wireless Charger", price: 1999, image: "https://via.placeholder.com/150" },
-        { id: 10, name: "External Hard Drive", price: 4999, image: "https://via.placeholder.com/150" },
-        { id: 11, name: "Fitness Tracker", price: 7999, image: "https://via.placeholder.com/150" },
-        { id: 12, name: "E-Reader", price: 12999, image: "https://via.placeholder.com/150" },
-    ]);
+  const filtered = allProducts.filter((p) => {
+    const matchesName = p.name.toLowerCase().includes(search.toLowerCase());
+    const matchesCategory = category === "All" || p.category === category;
+    return matchesName && matchesCategory;
+  });
 
-    return (
-        <div>
-            <h2>Products 🛍</h2>
-            <div className="product-grid">
-                {products.map((p) => (
-                    <div key={p.id} className="product-card">
-                        <img src={p.image} alt={p.name} />
-                        <h3>{p.name}</h3>
-                        <p>₹{p.price}</p>
-                        <button onClick={() => addToCart(p)}>Add to Cart</button>
-                    </div>
-                ))}
-            </div>
-        </div>
-    );
+  return (
+    <div className="products-page">
+      <h2>🛍️ Browse Products</h2>
+
+      <div className="filters">
+        <input
+          type="text"
+          placeholder="Search products..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <select value={category} onChange={(e) => setCategory(e.target.value)}>
+          <option value="All">All Categories</option>
+          <option value="Computers">Computers</option>
+          <option value="Mobiles">Mobiles</option>
+          <option value="Accessories">Accessories</option>
+          <option value="Wearables">Wearables</option>
+        </select>
+      </div>
+
+      <div className="product-list">
+        {filtered.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </div>
+    </div>
+  );
 }
 
 export default Products;
