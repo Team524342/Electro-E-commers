@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ProductCard from "../components/ProductCard";
+import ProductCard from "../components/productCard";
 import "./Products.css";
 
 const allProducts = [
