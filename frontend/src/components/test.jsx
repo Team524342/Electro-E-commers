@@ -10,9 +10,9 @@ const decrement =() =>{
     )
     
 }
-    return (<div>Test Component
-        <button type="button" onClick={handleClick}>N ={count} </button>
-        <button type="button" onClick={decrement} disabled={count===0}>N-- ={count} </button>
+    return (<div>Test Component count: {count}
+        <button type="button" onClick={handleClick}>+</button>
+        <button type="button" onClick={decrement} disabled={count===0}> -</button>
     </div>
 
     );
