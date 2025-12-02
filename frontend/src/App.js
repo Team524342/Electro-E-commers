@@ -10,6 +10,7 @@ import Cart from "./pages/cart";
 import Orders from "./pages/Orders";
 
 import "./App.css";
+import Test from "./components/test";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
               <Route path="/orders" element={<Orders />} />
 
             </Routes>
+            <div><Test /></div>
           </div>
         </div>
       </Router>
