@@ -19,7 +19,7 @@
     position: absolute;
     width: 100px;
     height: 100px;
-    background: radial-gradient(circle, rgba(255, 102, 0, 0.6), transparent);
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.6), transparent);
     border-radius: 50%;
     pointer-events: none;
     top: var(--y, 50%);
