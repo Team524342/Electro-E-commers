@@ -30,11 +30,6 @@ const liked =( ) => {
 }
     return (<div>Test Component count: {count}
         <button type="button" onClick={handleClick}>+</button>
-        <button type="button" onClick={decrement} disabled={count===0}> -</button>
-        <button type="button" onClick={handleClicks}>{showpara ? "hide" : "show"}</button>
-        <p>{showpara && "This is a paragraph shown conditionally."  }</p>
-        <button type="button" onClick={liked} >{like ? <Heart size={20} color="red"/> : <Heart size={20} color="green"/>}</button>{counts}
-        
         <HeartHandshakeIcon />
     </div>
     );
