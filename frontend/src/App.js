@@ -1,15 +1,16 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import Home from "./pages/Home";
+import Home from "./pages/home";
 import { CartProvider } from "./context/CartContext";
 //import { CartProvider } from "./CartContext";
-import Products from "./pages/Products";
+import Products from "./pages/products";
 import Checkout from "./pages/checkout";
 import OrderConfirmation from "./pages/OrderConfirmation";
-import Cart from "./pages/Cart";
+import Cart from "./pages/cart";
 import Orders from "./pages/Orders";
 
 import "./App.css";
+import Test from "./components/test";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
               <Route path="/orders" element={<Orders />} />
 
             </Routes>
+            {/* <div><Test /></div> */}
           </div>
         </div>
       </Router>

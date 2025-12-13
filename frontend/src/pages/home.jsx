@@ -1,8 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom";
-//import "./Home.css";
+import { useEffect } from "react";
+import "../components/Home.css";
 
 function Home() {
+  // Add this to your Home.js or component file
+useEffect(() => {
+    const hero = document.querySelector('.hero');
+    
+    hero.addEventListener('mousemove', (e) => {
+        const circle = hero.querySelector('::before');
+        const x = e.clientX - hero.getBoundingClientRect().left;
+        const y = e.clientY - hero.getBoundingClientRect().top;
+        
+        hero.style.setProperty('--x', x + 'px');
+        hero.style.setProperty('--y', y + 'px');
+    });
+}, []);
   return (
     <div className="home-container">
       <section className="hero">
