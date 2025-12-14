@@ -6,7 +6,7 @@ import { CartProvider } from "./context/CartContext";
 import Products from "./pages/products";
 import Checkout from "./pages/checkout";
 import OrderConfirmation from "./pages/OrderConfirmation";
-import Cart from "./pages/cart";
+import Cart from "./pages/Cart";
 import Orders from "./pages/Orders";
 
 import "./App.css";
